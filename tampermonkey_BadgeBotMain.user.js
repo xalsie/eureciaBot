@@ -1,11 +1,10 @@
 // ==UserScript==
 // @name         eurecia Badge Automator
 // @description  Automatise le badgage sur Eurecia aux heures souhaitées (matin et soir) pour éviter d'oublier de le faire manuellement.
-// @version      0.0.2
+// @version      0.0.3
 // @author       🐻｜LeGrizzly - legrizzly_0341
 // @match        https://plateforme.eurecia.com/eurecia/index.html#/dashboard
 // @icon         https://plateforme.eurecia.com/eurecia/assets/favicon.svg
-// @github       https://github.com/xalsie/eureciaBot
 // @namespace    https://github.com/xalsie/eureciaBot
 // ==/UserScript==
 
@@ -14,21 +13,21 @@
 
     class BadgeBot {
         constructor(morningHour, eveningHour) {
-            this.morningHour = morningHour;  // Heure du matin pour badger (format 24h)
-            this.eveningHour = eveningHour;  // Heure du soir pour badger (format 24h)
-            this.marginMinutes = marginMinutes;  // Marge de tolérance (en minutes)
-            this.switchSelector = '#switch-time-clock';  // Sélecteur du bouton de badgage
+            this.morningHour = morningHour; // Heure du matin pour badger (format 24h)
+            this.eveningHour = eveningHour; // Heure du soir pour badger (format 24h)
+            this.marginMinutes = marginMinutes; // Marge de tolérance (en minutes)
+            this.switchSelector = '#switch-time-clock'; // Sélecteur du bouton de badgage
         }
 
         // Méthode pour vérifier l'état actuel de la checkbox
         isChecked() {
-            return $(this.switchSelector).hasClass('ea-switch--enable');
+            return document.querySelector(this.switchSelector).classList.contains('ea-switch--enable');
         }
 
         // Méthode pour cliquer sur le bouton de badgage si nécessaire
         toggleBadge() {
             if (!this.isChecked()) {
-                $(this.switchSelector).click();
+                document.querySelector(this.switchSelector).click();
                 console.log('Badgé avec succès');
             } else {
                 console.log('Déjà badgé');
@@ -68,9 +67,9 @@
         // Simuler une activité dans le navigateur
         preventSleep() {
             setInterval(() => {
-                window.dispatchEvent(new Event('mousemove'));  // Simule un mouvement de souris
+                window.dispatchEvent(new Event('mousemove')); // Simule un mouvement de souris
                 console.log('Activité simulée pour éviter la mise en veille');
-            }, 50000);  // Toutes les 50 secondes
+            }, 50000); // Toutes les 50 secondes
         }
 
         keepAwake = async () => {
@@ -91,11 +90,11 @@
                 this.autoBadge();
             }, 60000); // 60000 ms = 1 minute
 
-            this.keepAwake();  // Empêche la mise en veille du navigateur
+            this.keepAwake(); // Empêche la mise en veille du navigateur
         }
     }
 
     // Instanciation du bot avec les heures de badgage souhaitées
-    const bot = new BadgeBot(9, 17, 60);  // 9h pour le matin et 17h pour le soir, avec une marge de 60 minutes
+    const bot = new BadgeBot(9, 17, 60); // 9h pour le matin et 17h pour le soir, avec une marge de 60 minutes
     bot.start();
 })();
