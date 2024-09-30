@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name         eurecia Badge Auto
-// @namespace    http://tampermonkey.net/
-// @version      2024-09-30
+// @name         eurecia Badge Automator
 // @description  Automatise le badgage sur Eurecia aux heures souhaitées (matin et soir) pour éviter d'oublier de le faire manuellement.
+// @version      0.0.2
 // @author       🐻｜LeGrizzly - legrizzly_0341
 // @match        https://plateforme.eurecia.com/eurecia/index.html#/dashboard
 // @icon         https://plateforme.eurecia.com/eurecia/assets/favicon.svg
-// @grant        none
+// @github       https://github.com/xalsie/eureciaBot
+// @namespace    https://github.com/xalsie/eureciaBot
 // ==/UserScript==
 
 (function() {
