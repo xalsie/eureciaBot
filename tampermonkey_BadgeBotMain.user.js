@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         eurecia Badge Automator
 // @description  Automatise le badgage sur Eurecia aux heures souhaitées (matin et soir) pour éviter d'oublier de le faire manuellement.
-// @version      0.1.0
+// @version      0.2.0.beta1
 // @author       🐻｜LeGrizzly - legrizzly_0341
 // @match        https://plateforme.eurecia.com/eurecia/index.html#/dashboard
 // @icon         https://plateforme.eurecia.com/eurecia/assets/favicon.svg
@@ -11,11 +11,22 @@
 ;(function () {
     "use strict"
 
+    const param = {
+        morningHour: "9:00",
+        eveningHour: "17:00",
+        marginSecondes: "60",
+        random: true,
+        randomMarge: "20"
+    }
+
     class BadgeBot {
-        constructor(morningHour, eveningHour, marginSecondes) {
-            this.morningHour = morningHour // Heure du matin pour badger (format 24h)
-            this.eveningHour = eveningHour // Heure du soir pour badger (format 24h)
-            this.marginSecondes = marginSecondes // Marge de tolérance (en secondes)
+        constructor(p) {
+            this.morningHour = p.morningHour // Heure du matin pour badger (format 24h)
+            this.eveningHour = p.eveningHour // Heure du soir pour badger (format 24h)
+            this.marginSecondes = p.marginSecondes // Marge de tolérance (en secondes)
+
+            this.random = p.random
+            this.randomMarge = p.randomMarge
 
             this.morningHourBadge = false // Indique si le badgage du matin a déjà été effectué
             this.eveningHourBadge = false // Indique si le badgage du soir a déjà été effectué
@@ -113,6 +124,6 @@
     }
 
     // Instanciation du bot avec les heures de badgage souhaitées
-    const bot = new BadgeBot(9, 17, 60) // 9h pour le matin et 17h pour le soir, avec une marge de 60 secondes
+    const bot = new BadgeBot(param) // 9h pour le matin et 17h pour le soir, avec une marge de 60 secondes
     bot.start()
 })()
